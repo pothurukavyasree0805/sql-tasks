@@ -1,0 +1,180 @@
+TASK-1  SQL commands 
+
+Task 1 Create a database named school_db. 
+
+create database school_db;
+
+output:
++--------------------+
+| Database           |
++--------------------+
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| school_db          |
+| sys                |
++--------------------+
+
+Task 2 Create a table named students with the following columns: 
+• id (integer)
+• name (varchar 50)
+• age (integer) 
+ 
+MySQL  localhost:33060+ ssl  school_db  SQL > create table students(
+                                            -> id int,
+                                            -> name varchar(50),
+                                            -> age int);
+
+output:
++---------------------+
+| Tables_in_school_db |
++---------------------+
+| students            |
++---------------------+
+
+Task 3 Create a database named company_db
+
+ create database company_db;
+
+output:
++--------------------+
+| Database           |
++--------------------+
+| company_db         |
+| d13                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| school_db          |
+| sys                |
++--------------------+ 
+
+Task 4 Create a table named employees with columns: 
+• emp_id (integer) 
+• emp_name (varchar 100)
+• salary (decimal 10,2)
+• department (varchar 50)
+
+ MySQL  localhost:33060+ ssl  company_db  SQL > create table employees(
+                                             -> emp_id int,
+                                             -> emp_name varchar(100),
+                                             -> salary decimal(10,2),
+                                             -> department varchar (50));
+
+output:
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
++----------------------+ 
+
+Task 5 Create a table named products with columns:
+• product_id (integer) 
+• product_name (varchar 100) 
+• price (float)
+
+MySQL  localhost:33060+ ssl  company_db  SQL > create table products(
+                                             -> product_id int,
+                                             -> product_name varchar(100),
+                                             -> price float);
+output:
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| products             |
++----------------------+
+
+Task 6 Create a database named library_db.
+
+create database library_db;
+ 
+output:
++--------------------+
+| Database           |
++--------------------+
+| company_db         |
+| d13                |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| school_db          |
+| sys                |
++--------------------+
+
+Task 7 Create a table named books with columns: 
+• book_id (integer) • title (varchar 150) 
+• author (varchar 100)
+• price (decimal 8,2)
+
+ MySQL  localhost:33060+ ssl  library_db  SQL > create table books(
+                                             -> book_id  int,
+                                             -> title varchar(150),
+                                             -> author varchar (100),
+                                             -> price decimal(8,2));
+
+output:
++----------------------+
+| Tables_in_library_db |
++----------------------+
+| books                |
++----------------------+
+
+Task 8 Create a table named orders with columns
+• order_id (integer)
+• customer_name (varchar 100) 
+• order_date (date) • amount (decimal 10,2)
+
+MySQL  localhost:33060+ ssl  library_db  SQL > create table orders(
+                                             -> order_id int,
+                                             -> customer_name varchar(100),
+                                             -> order_date date,
+                                             -> amount decimal(10,2));
+
+output:
++----------------------+
+| Tables_in_library_db |
++----------------------+
+| books                |
+| orders               |
++----------------------+
+
+Task 9 Create a database named college_db.
+
+create database college_db;
+
+output:
++--------------------+
+| Database           |
++--------------------+
+| college_db         |
+| company_db         |
+| d13                |
+| information_schema |
+| library_db         |
+| mysql              |
+| performance_schema |
+| school_db          |
+| sys                |
++--------------------+
+
+Task 10 Create a table named courses with columns
+• course_id (integer) 
+• course_name (varchar 100)
+• duration (integer) 
+
+ MySQL  localhost:33060+ ssl  college_db  SQL > create table courses(
+                                             -> course_id int,
+                                             -> course_name varchar(100),
+                                             -> duration int);
+output:
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| courses              |
++----------------------+
+
+
+

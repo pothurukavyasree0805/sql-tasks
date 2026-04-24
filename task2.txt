@@ -1,0 +1,357 @@
+Task2 DML Commands and Date/Time Datatypes
+
+Date & Time Datatype Tasks
+
+Tasks:
+
+1. Task 1: Create an appointments table with columns: id (INT), patient_name (VARCHAR 50),
+appointment_date (DATE), appointment_time (TIME)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table appointments(
+                                      -> id int,
+                                      -> patient_name varchar(50),
+                                      -> appointment_date date,
+                                      -> appointment_time time);
+
+output:
+
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
++---------------+
+
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| id               | int         | YES  |     | NULL    |       |
+| patient_name     | varchar(50) | YES  |     | NULL    |       |
+| appointment_date | date        | YES  |     | NULL    |       |
+| appointment_time | time        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+
+
+2. Task 2: Create an orders table with columns: order_id (INT), item (VARCHAR 50), ordered_at
+(DATETIME), shipped_at (TIMESTAMP)
+
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table orders(
+                                      -> order_id int,
+                                      -> item varchar(50),
+                                      -> ordered_at datetime,
+                                      -> shipped_at timestamp);
+output:
++---------------+
+| Tables_in_d13 |
++---------------+
+| appointments  |
+| orders        |
++---------------+
+
+
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| order_id   | int         | YES  |     | NULL    |       |
+| item       | varchar(50) | YES  |     | NULL    |       |
+| ordered_at | datetime    | YES  |     | NULL    |       |
+| shipped_at | timestamp   | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+INSERT Command Practice Tasks
+Tasks:
+
+1. Task 1: Insert a single record into the students table (id, name, age, city)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into students(id,name,age,city)
+                                      -> values(1,"arjun",24,"Hyderabad");
+
+output:
+
++----+-------+-----+-----------+
+| id | name  | age | city      |
++----+-------+-----+-----------+
+|  1 | arjun |  24 | Hyderabad |
++----+-------+-----+-----------+
+
+
+2. Task 2: Insert a single record into the employees table using all column values without
+specifying column names
+
+MySQL  localhost:33060+ ssl  d13  SQL > insert into employees values(101,"John","HR",40000);
+
+output:
+
++--------+----------+------------+----------+
+| emp_id | emp_name | department | salary   |
++--------+----------+------------+----------+
+|    101 | John     | HR         | 40000.00 |
++--------+----------+------------+----------+
+
+3. Task 3: Insert 3 records at once into the products table (product_id, product_name, price)
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into product(product_id,product_name,price)
+                                      -> values(1001,"TV",75000),(1002,"washing machine",40000),(1003,"Fridge",55000);
+
+output:
+
++------------+-----------------+----------+
+| product_id | product_name    | price    |
++------------+-----------------+----------+
+|       1001 | TV              | 75000.00 |
+|       1002 | washing machine | 40000.00 |
+|       1003 | Fridge          | 55000.00 |
++------------+-----------------+----------+
+
+
+4. Task 4: Insert a record into the appointments table with a DATE value for appointment_date and
+TIME for appointment_time
+
+ MySQL  localhost:33060+ ssl  d13  SQL > insert into appointments(appointment_date,appointment_time)
+                                      -> values('2025-04-15','10:15:30');
+
+output:
+
++------+--------------+------------------+------------------+
+| id   | patient_name | appointment_date | appointment_time |
++------+--------------+------------------+------------------+
+| NULL | NULL         | 2025-04-15       | 10:15:30         |
++------+--------------+------------------+------------------+
+
+
+5. Task 5: Insert 2 records into the orders table with DATETIME and TIMESTAMP values
+
+insert into orders values(111,"bags",'2026-02-24:12:01:33','2026-02-24 12:01:33'),(112,"shoes",'2026-03-10:01:15:45','2026-03-10 01:15:45');
+
+output:
+
++----------+-------+---------------------+---------------------+
+| order_id | item  | ordered_at          | shipped_at          |
++----------+-------+---------------------+---------------------+
+|      111 | bags  | 2026-02-24 12:01:33 | 2026-02-24 12:01:33 |
+|      112 | shoes | 2026-03-10 01:15:45 | 2026-03-10 01:15:45 |
++----------+-------+---------------------+---------------------+
+
+
+UPDATE Command Practice Tasks
+Tasks:
+
+1. Task 1: Update the city of student with id = 2 to 'Bangalore' in the students table
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update students
+                                      -> set city="Bangalore"
+                                      -> where id=2;
+
+output:
+
++----+-------+-----+-----------+
+| id | name  | age | city      |
++----+-------+-----+-----------+
+|  1 | arjun |  24 | Hyderabad |
+|  2 | varun |  25 | Bangalore |
++----+-------+-----+-----------+
+
+
+2. Task 2: Increase the salary of all employees in the 'HR' department by 5000 in the employees
+table
+
++--------+----------+------------+----------+
+| emp_id | emp_name | department | salary   |
++--------+----------+------------+----------+
+|    101 | John     | HR         | 40000.00 |
+|    102 | Alex     | Sales      | 35000.00 |
+|    103 | Micheal  | IT         | 42000.00 |
+|    104 | James    | HR         | 38000.00 |
+|    105 | David    | Marketing  | 30000.00 |
++--------+----------+------------+----------+
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update employees
+                                      -> set salary= salary+5000
+                                      -> where department="HR";
+
+output:
+
++--------+----------+------------+----------+
+| emp_id | emp_name | department | salary   |
++--------+----------+------------+----------+
+|    101 | John     | HR         | 45000.00 |
+|    102 | Alex     | Sales      | 35000.00 |
+|    103 | Micheal  | IT         | 42000.00 |
+|    104 | James    | HR         | 43000.00 |
+|    105 | David    | Marketing  | 30000.00 |
++--------+----------+------------+----------+
+
+
+3. Task 3: Update all records in the products table — set price = 0 (without WHERE clause)
+
++------------+-----------------+----------+
+| product_id | product_name    | price    |
++------------+-----------------+----------+
+|       1001 | TV              | 75000.00 |
+|       1002 | washing machine | 40000.00 |
+|       1003 | Fridge          | 55000.00 |
++------------+-----------------+----------+
+
+ MySQL  localhost:33060+ ssl  d13  SQL > update product
+                                      -> set price=0
+                                      -> ;
+
+output:
+
++------------+-----------------+-------+
+| product_id | product_name    | price |
++------------+-----------------+-------+
+|       1001 | TV              |  0.00 |
+|       1002 | washing machine |  0.00 |
+|       1003 | Fridge          |  0.00 |
++------------+-----------------+-------+
+
+4. Task 4: Update the appointment_date to '2024-07-20' for the appointment with id = 1 in the
+appointments table
+
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Ram          | 2025-04-15       | 10:15:30         |
+|  2 | Ajay         | 2026-03-04       | 11:01:34         |
+|  3 | Surya        | 2026-02-20       | 01:11:25         |
++----+--------------+------------------+------------------+
+
+MySQL  localhost:33060+ ssl  d13  SQL > update appointments
+                                      -> set appointment_date='2024-07-20'
+                                      -> where id=1;
+
+output:
+
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Ram          | 2024-07-20       | 10:15:30         |
+|  2 | Ajay         | 2026-03-04       | 11:01:34         |
+|  3 | Surya        | 2026-02-20       | 01:11:25         |
++----+--------------+------------------+------------------+
+
+
+DELETE Command Practice Tasks
+Tasks:
+
+1. Task 1: Delete the student with id = 3 from the students table
+
++----+--------+-----+-----------+
+| id | name   | age | city      |
++----+--------+-----+-----------+
+|  1 | arjun  |  24 | Hyderabad |
+|  2 | varun  |  25 | Bangalore |
+|  3 | Sunil  |  23 | Chennai   |
+|  4 | Vinay  |  24 | Pune      |
+|  5 | Nikhil |  25 | Mangaluru |
++----+--------+-----+-----------+
+
+MySQL  localhost:33060+ ssl  d13  SQL > delete from students
+                                      -> where id=3;
+
+output:
+
++----+--------+-----+-----------+
+| id | name   | age | city      |
++----+--------+-----+-----------+
+|  1 | arjun  |  24 | Hyderabad |
+|  2 | varun  |  25 | Bangalore |
+|  4 | Vinay  |  24 | Pune      |
+|  5 | Nikhil |  25 | Mangaluru |
++----+--------+-----+-----------+
+
+2. Task 2: Delete all employees whose department is 'Finance' from the employees table
+
++--------+----------+------------+----------+
+| emp_id | emp_name | department | salary   |
++--------+----------+------------+----------+
+|    101 | John     | HR         | 45000.00 |
+|    102 | Alex     | Sales      | 35000.00 |
+|    103 | Micheal  | IT         | 42000.00 |
+|    104 | James    | HR         | 43000.00 |
+|    105 | David    | Marketing  | 30000.00 |
+|    106 | George   | Finance    | 50000.00 |
+|    107 | Isbella  | Admin      | 32000.00 |
+|    108 | Jack     | Finance    | 49000.00 |
++--------+----------+------------+----------+
+
+MySQL  localhost:33060+ ssl  d13  SQL > delete from employees
+                                      -> where department="Finance";
+
+output:
++--------+----------+------------+----------+
+| emp_id | emp_name | department | salary   |
++--------+----------+------------+----------+
+|    101 | John     | HR         | 45000.00 |
+|    102 | Alex     | Sales      | 35000.00 |
+|    103 | Micheal  | IT         | 42000.00 |
+|    104 | James    | HR         | 43000.00 |
+|    105 | David    | Marketing  | 30000.00 |
+|    107 | Isbella  | Admin      | 32000.00 |
++--------+----------+------------+----------+
+
+
+3. Task 3: Delete all records from the products table (without WHERE clause)
+
++------------+-----------------+-------+
+| product_id | product_name    | price |
++------------+-----------------+-------+
+|       1001 | TV              |  0.00 |
+|       1002 | washing machine |  0.00 |
+|       1003 | Fridge          |  0.00 |
++------------+-----------------+-------+
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from product;
+Query OK, 3 rows affected (0.0256 sec)
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select*from product;
+Empty set (0.0013 sec)
+
+
+4. Task 4: Delete the appointment whose appointment_date is before '2024-06-01' from the
+appointments table
+
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Ram          | 2024-07-20       | 10:15:30         |
+|  2 | Ajay         | 2024-06-01       | 11:01:34         |
+|  3 | Surya        | 2026-02-20       | 01:11:25         |
++----+--------------+------------------+------------------+
+
+ MySQL  localhost:33060+ ssl  d13  SQL > delete from appointments
+                                      -> where appointment_date= '2024-06-01';
+
+output:
+
++----+--------------+------------------+------------------+
+| id | patient_name | appointment_date | appointment_time |
++----+--------------+------------------+------------------+
+|  1 | Ram          | 2024-07-20       | 10:15:30         |
+|  3 | Surya        | 2026-02-20       | 01:11:25         |
++----+--------------+------------------+------------------+
+
+
+5. Task 5: Delete all orders from the orders table where shipped_at is NUL
+
++----------+-------+---------------------+---------------------+
+| order_id | item  | ordered_at          | shipped_at          |
++----------+-------+---------------------+---------------------+
+|      111 | bags  | 2026-02-24 12:01:33 | 2026-03-10 01:15:45 |
+|      112 | shoes | 2026-03-10 01:15:45 | NULL                |
+|      113 | Books | 2025-03-13 11:06:24 | 2026-03-10 01:15:45 |
++----------+-------+---------------------+---------------------+
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  delete from orders
+                                      -> where shipped_at is NULL;
+output:
+
++----------+-------+---------------------+---------------------+
+| order_id | item  | ordered_at          | shipped_at          |
++----------+-------+---------------------+---------------------+
+|      111 | bags  | 2026-02-24 12:01:33 | 2026-03-10 01:15:45 |
+|      113 | Books | 2025-03-13 11:06:24 | 2026-03-10 01:15:45 |
++----------+-------+---------------------+---------------------+

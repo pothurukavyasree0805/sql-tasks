@@ -1,0 +1,11 @@
+MySQL  localhost:33060+ ssl  d13  SQL > select product_id,product_name, ((price*50)-100)as bulk_discount
+                                      -> from products;
++------------+--------------+---------------+
+| product_id | product_name | bulk_discount |
++------------+--------------+---------------+
+|        111 | TV           |    1499900.00 |
+|        112 | AC           |    1999900.00 |
+|        113 | Fridge       |    1749900.00 |
+|        114 | Laptop       |    2499900.00 |
+|        115 | Mobile       |    1249900.00 |
++------------+--------------+---------------+

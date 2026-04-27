@@ -168,3 +168,114 @@ Task
 |  5 | Amit     | Chennai   |   520 | amit@email.com  |
 |  6 | Vikram   | Bangalore |   490 | vik@email.com   |
 +----+----------+-----------+-------+-----------------+
+Find students who are from 'Mumbai', 'Pune', or 'Kolkata'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select id, name from students
+                                      -> where city= "Mumbai" or city= "Pune" or city= "Kolkata";
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Siddhart |
+|  2 | Anaya    |
+|  3 | Rohan    |
++----+----------+
+
+Find students who are not from 'Delhi' or 'Chennai'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select id, name from students
+                                      -> where city not in ("Delhi","Chennai");
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Siddhart |
+|  2 | Anaya    |
+|  3 | Rohan    |
+|  6 | Vikram   |
++----+----------+
+
+Find students whose email is not filled in (NULL)
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select id, name from students
+                                      ->  where email_id is  Null;
++----+-------+
+| id | name  |
++----+-------+
+|  3 | Rohan |
++----+-------+
+ 
+Find students who have an email address
+
+output:
+
+MySQL  localhost:33060+ ssl  d13  SQL > select id, name from students
+                                      ->  where email_id is not Null;
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Siddhart |
+|  2 | Anaya    |
+|  4 | Sana     |
+|  5 | Amit     |
+|  6 | Vikram   |
++----+----------+
+
+Find students whose name starts with 'S'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select id, name from students
+                                      -> where name like 'S%';
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Siddhart |
+|  4 | Sana     |
++----+----------+
+
+Find students whose name ends with 'a'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select id, name from students
+                                      -> where name like '%a';
++----+-------+
+| id | name  |
++----+-------+
+|  2 | Anaya |
+|  4 | Sana  |
++----+-------+
+
+Find students whose name has exactly 4 letters
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select id, name from students
+                                      ->  where name like '____';
++----+------+
+| id | name |
++----+------+
+|  4 | Sana |
+|  5 | Amit |
++----+------+
+
+Find students whose name does not start with 'R'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select id, name from students
+                                      -> where name not like 'R%';
++----+----------+
+| id | name     |
++----+----------+
+|  1 | Siddhart |
+|  2 | Anaya    |
+|  4 | Sana     |
+|  5 | Amit     |
+|  6 | Vikram   |
++----+----------+

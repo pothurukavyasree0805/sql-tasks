@@ -1,9 +1,7 @@
 TASK-1  SQL commands 
 
 Task 1 Create a database named school_db. 
-df
 create database school_db;
-
 output:
 +--------------------+
 | Database           |

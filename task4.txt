@@ -1,0 +1,170 @@
+Task-4 SQL Operators – Practice Tasks
+
+
+1. Comparison Operators
+Task: Given a products table with columns product_name, price, and stock_quantity:
+
++------------+--------------+---------+----------------+
+| product_id | product_name | price   | stock_quantity |
++------------+--------------+---------+----------------+
+|          1 | Books        |  500.00 |             20 |
+|          2 | Pen          | 1000.00 |             15 |
+|          3 | Pencil       |  500.00 |              9 |
+|          4 | Paints       | 1100.00 |             15 |
+|          5 | Erase        |  250.00 |             50 |
+|          6 | Markers      |  200.00 |             60 |
++------------+--------------+---------+----------------+
+
+Task
+Find all products where price is exactly 500
+
+Output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id, product_name from products
+                                      -> where price=500;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          1 | Books        |
+|          3 | Pencil       |
++------------+--------------+
+
+
+Find products where stock_quantity is less than 10
+
+output:
+
+MySQL  localhost:33060+ ssl  d13  SQL > select product_id, product_name from products
+                                      -> where stock_quantity<10;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          3 | Pencil       |
++------------+--------------+
+
+
+Find products where price is greater than 1000
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select product_id, product_name from products
+                                      -> where price>1000;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          4 | Paints       |
++------------+--------------+
+
+Find products where price is less than or equal to 250
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_id, product_name from products
+                                      ->  where price<=250;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          5 | Erase        |
+|          6 | Markers      |
++------------+--------------+
+
+Find products where stock_quantity is greater than or equal to 50
+
+output:
+
+MySQL  localhost:33060+ ssl  d13  SQL >  select product_id, product_name from products
+                                      -> where stock_quantity>=50;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          5 | Erase        |
+|          6 | Markers      |
++------------+--------------+
+
+Find products where product_name is not 'Pen'
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select product_id, product_name from products
+                                      -> where product_name!="Pen";
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|          1 | Books        |
+|          3 | Pencil       |
+|          4 | Paints       |
+|          5 | Erase        |
+|          6 | Markers      |
++------------+--------------+
+
+2. Logical Operators
+Task: Given an employees table with columns name, salary, department, and city:
+
++--------+----------+----------+------------+-----------+
+| emp_id | emp_name | salary   | department | city      |
++--------+----------+----------+------------+-----------+
+|    101 | John     | 40000.00 | HR         | Hyderabad |
+|    102 | Alex     | 42000.00 | Sales      | Pune      |
+|    103 | James    | 62000.00 | Sales      | Hyderabad |
+|    104 | James    | 56000.00 | Finance    | Hyderabad |
++--------+----------+----------+------------+-----------+
+Task
+
+Find employees in the 'Sales' department whose salary is greater than 40000
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select emp_id, emp_name from employees
+                                      ->  where department="sales" and salary>40000;
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    102 | Alex     |
+|    103 | James    |
++--------+----------+
+
+
+Find employees who are either from 'Hyderabad' or have a salary greater than 60000
+
+output:
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select emp_id, emp_name from employees
+                                      -> where city="Hyderabad" or salary>60000;
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    101 | John     |
+|    103 | James    |
+|    104 | James    |
++--------+----------+
+
+Find all employees who do not belong to the 'Finance' department
+
+output:
+
+MySQL  localhost:33060+ ssl  d13  SQL > select emp_id, emp_name from employees
+                                      -> where department!="Finance";
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    101 | John     |
+|    102 | Alex     |
+|    103 | James    |
++--------+----------+
+
+3. Special Operators
+
+Task: Given a students table with columns name, city, marks, and email:
+
+Task
+
++----+----------+-----------+-------+-----------------+
+| id | name     | city      | marks | email_id        |
++----+----------+-----------+-------+-----------------+
+|  1 | Siddhart | Mumbai    |   550 | sid@email.com   |
+|  2 | Anaya    | Pune      |   500 | anaya@email.com |
+|  3 | Rohan    | Kolkata   |   560 | NULL            |
+|  4 | Sana     | Delhi     |   480 | sana@email.com  |
+|  5 | Amit     | Chennai   |   520 | amit@email.com  |
+|  6 | Vikram   | Bangalore |   490 | vik@email.com   |
++----+----------+-----------+-------+-----------------+

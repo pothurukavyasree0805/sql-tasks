@@ -1,0 +1,50 @@
+Task-5 Task on Constraints
+
+Task-1: Create a user table with columns id and phone. Apply UNIQUE at the column level
+so no two users can share the same phone number.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table users(
+                                      -> id int unique,
+                                      -> phone_no varchar(50) unique);
+
+Task-2: Add a unique constraint to an existing table (here table is already created).
+
+MySQL  localhost:33060+ ssl  d13  SQL > alter table employees
+                                      ->  add unique (emp_id);
+
+Task-3: Create a students table where name and roll_no are mandatory
+
+MySQL  localhost:33060+ ssl  d13  SQL > create table student(
+                                      -> name varchar(50) not null,
+                                      -> roll_no int not null);
+
+Task-4: Make the address column NOT NULL in an existing table
+
+MySQL  localhost:33060+ ssl  d13  SQL > alter table employees
+                                      -> add address varchar(250) not null;
+
+Task-5: Create a books table with a primary key
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table books(
+                                      -> book_id int primary key,
+                                      -> book_name varchar(50) not null,
+                                      -> price decimal(10,2) not null);
+
+Task-6: Add a primary key to an existing table
+
+MySQL  localhost:33060+ ssl  d13  SQL >  alter table employee
+                                      -> add primary key(emp_id);
+
+
+Task-7: Create an employees table with age validation
+
+ MySQL  localhost:33060+ ssl  d13  SQL > create table employe(
+                                      -> emp_id int,
+                                      -> emp_name varchar(50),
+                                      -> age int check (age>25));
+
+
+Task-8: Add a check constraint to an existing table
+
+ MySQL  localhost:33060+ ssl  d13  SQL > alter table students
+                                      -> add check (marks>500);

@@ -1,0 +1,116 @@
+Task-6 Aggregate Functions  
+
+1. Write a query to count total number of employees.
+
+select count(*) from employees;
+
+output:
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+
+2. Count how many employees have salary.
+
+select count(salary) from employees;
+
+output:
+
++---------------+
+| count(salary) |
++---------------+
+|             4 |
++---------------+
+
+3. Find number of unique departments.
+
+select count(distinct department) from employees;
+
+output:
+
++----------------------------+
+| count(distinct department) |
++----------------------------+
+|                          3 |
++----------------------------+
+
+4. Find total salary paid to all employees.
+
+ select sum(salary) from employees;
+
+output:
+
++-------------+
+| sum(salary) |
++-------------+
+|   200000.00 |
++-------------+
+
+5. Find average salary.
+
+select avg(salary) from employees;
+
+output:
++--------------+
+| avg(salary)  |
++--------------+
+| 50000.000000 |
++--------------+
+
+6. Calculate total of distinct bonus values.
+
+select sum(distinct bonus) from employee;
+
+output:
+
++-----------------------------+
+| sum(distinct bonus)         |
++-----------------------------+
+|                        5890 |
++-----------------------------+
+
+7. Find highest salary.
+
+ select max(salary) from employees;
+
+output:
+
++-------------+
+| max(salary) |
++-------------+
+|    62000.00 |
++-------------+ 
+
+8. Find lowest salary.
+
+select min(salary) from employees;
+
++-------------+
+| min(salary) |
++-------------+
+|    40000.00 |
++-------------+ 
+
+9. Calculate total payout (salary + bonus) for all employees.
+
+select sum(salary+bonus) from employee;
+
+output:
+
++-----------------------------------+
+| sum(salary+bonus) 		    |
++-----------------------------------+
+|                         218890.00 |
++-----------------------------------+
+
+10.Find average salary after deducting tax (10%).
+
+ select avg(salary-(salary*0.10)) from employees;
+
+output:
++---------------------------+
+| avg(salary-(salary*0.10)) |
++---------------------------+
+|            45000.00000000 |
++---------------------------+

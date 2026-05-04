@@ -1,0 +1,201 @@
+Task-8 clauses
+
+1. You have a table called orders with columns customer_id and amount. Write a query
+to find all customers who have placed more than 3 orders.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select customer_id
+                                      -> from orders
+                                      -> group by customer_id
+                                      -> having count(*)>3;
+output:
++-------------+
+| customer_id |
++-------------+
+|         101 |
++-------------+
+
+2. From a products table (columns: category, price), write a query to list only those
+categories where the total price of all products exceeds 50,000.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select category, sum(price) as total_price
+                                      -> from products
+                                      -> group by category
+                                      -> having sum(price)>50000;
+output:
+                                      -> having sum(price)>50000;
++-------------+-------------+
+| category    | total_price |
++-------------+-------------+
+| Electronics |   140000.00 |
+| Furniture   |    63000.00 |
++-------------+-------------+
+
+3. From a sales table (columns: salesperson_id, product_id, quantity, sale_date), write a
+query to find salespersons who have sold at least 3 distinct products AND whose total
+quantity sold is above 100.
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  SELECT salesperson_id
+                                      -> from sales
+                                      -> group by salesperson_id
+                                      ->  having count(distinct product_id)>=3
+                                      -> and sum(quantity)>100;
+output:
++----------------+
+| salesperson_id |
++----------------+
+|            201 |
++----------------+
+
+4. From an employees table (columns: name, salary), write a query to display all
+employees sorted by salary from highest to lowest.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select emp_name, salary
+                                      -> from employees
+                                      -> order by salary desc;
+output:
++----------+----------+
+| emp_name | salary   |
++----------+----------+
+| Sam      | 62000.00 |
+| James    | 56000.00 |
+| Alex     | 42000.00 |
+| John     | 40000.00 |
++----------+----------+
+
+5. From a products table (columns: product_name, price), write a query that shows each
+product's name and its price after a 15% discount, sorted by the discounted price in
+ascending order. Use a column alias.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_name, (price*85/100) as discounted_price
+                                      -> from products
+                                      -> order by discounted_price asc;
+output:
++--------------+------------------+
+| product_name | discounted_price |
++--------------+------------------+
+| Chair        |      6800.000000 |
+| Table        |     12750.000000 |
+| Phone        |     25500.000000 |
+| Sofa         |     34000.000000 |
+| TV           |     42500.000000 |
+| Laptop       |     51000.000000 |
++--------------+------------------+
+
+6. From a students table (columns: name, grade, score), write a query to sort students
+first by grade ascending, then by score descending within each grade. Also explain
+what happens to any NULL scores in ascending vs descending sort.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select name, grade, score
+                                      -> from students
+                                      -> order by grade asc, score desc;
+output:
++-------+-------+-------+
+| name  | grade | score |
++-------+-------+-------+
+| Pooja | A     |    95 |
+| Asha  | A     |    90 |
+| Kiran | A     |    85 |
+| Ravi  | B     |    75 |
+| Sneha | B     |  NULL |
+| Anil  | C     |    60 |
++-------+-------+-------+
+Null comes first in ascending order and last in descending order.
+
+7. From a customers table, write a query to fetch only the first 5 records.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select customer_id, customer_name
+                                      -> from customers
+                                      -> limit 5;
+output:
++-------------+---------------+
+| customer_id | customer_name |
++-------------+---------------+
+|         101 | Raj           |
+|         102 | Simran        |
+|         103 | Arjun         |
+|         104 | Meena         |
+|         105 | Vikram        |
++-------------+---------------+
+
+8. From a products table (columns: product_name, price), write a query to find the top 3
+most expensive products.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select product_name, price
+                                      -> from products
+                                      -> order by price desc
+                                      -> limit 3;
+output:
++--------------+----------+
+| product_name | price    |
++--------------+----------+
+| Laptop       | 60000.00 |
+| TV           | 50000.00 |
+| Sofa         | 40000.00 |
++--------------+----------+
+
+
+9. From an employees table (columns: name, department, salary), write a query to find
+the 3 highest-paid employees in the 'Engineering' department only.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select name, department, salary
+                                      -> from employees
+                                      -> where department="Engineering"
+                                      -> order by salary desc
+                                      -> limit 3;
+output:
++-------+-------------+----------+
+| name  | department  | salary   |
++-------+-------------+----------+
+| Ravi  | Engineering | 90000.00 |
+| Amit  | Engineering | 80000.00 |
+| Kiran | Engineering | 75000.00 |
++-------+-------------+----------+
+
+10. From a students table, write a query to skip the first 5 rows and return the next 5
+rows.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select student_id, name
+                                      -> from students
+                                      -> limit 5 offset 5;
++------------+-------+
+| student_id | name  |
++------------+-------+
+|          6 | Pooja |
+|          7 | Rahul |
+|          8 | Meena |
+|          9 | Arjun |
+|         10 | Divya |
++------------+-------+
+
+11. You are building a product listing page that shows 8 products per page. Write the
+query for page 4.
+
+ MySQL  localhost:33060+ ssl  d13  SQL >  select*
+                                      ->  from products
+                                      -> limit 8 offset 24;
+output:
++------------+--------------+-------------+---------+
+| product_id | product_name | category    | price   |
++------------+--------------+-------------+---------+
+|         25 | Jacket       | Accessories | 3500.00 |
++------------+--------------+-------------+---------+
+
+
+12. From an orders table (columns: order_id, customer_id, order_date, amount), write a
+complete paginated query that shows the 3rd page of results (10 items per page),
+sorted by order_date descending. Also write the formula you used to calculate the
+offset.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select *
+                                      -> from orders
+                                      -> order by order_date desc
+                                      -> limit 10 offset 20;
++----------+-------------+------------+---------+
+| order_id | customer_id | order_date | amount  |
++----------+-------------+------------+---------+
+|        5 |         101 | 2024-01-14 | 4000.00 |
+|        4 |         103 | 2024-01-13 | 9000.00 |
+|        3 |         101 | 2024-01-12 | 3000.00 |
+|        2 |         102 | 2024-01-11 | 7000.00 |
+|        1 |         101 | 2024-01-10 | 5000.00 |
++----------+-------------+------------+---------+

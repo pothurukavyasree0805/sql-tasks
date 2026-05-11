@@ -1,0 +1,586 @@
+Task-9 Joins
+1. Company, Department, Employees
+
+1. Retrieve all employees along with their department names.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > Select e.emp_name, d.dept_name
+                                      -> from employees e
+                                      -> inner join departments d ON e.dept_id = d.dept_id;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Amit     | HR        |
+| Kiran    | HR        |
+| Ravi     | IT        |
+| Priya    | IT        |
+| Sita     | Finance   |
+| Rahul    | Finance   |
+| Anu      | Marketing |
+| Neha     | Marketing |
+| John     | Support   |
+| Arjun    | Support   |
++----------+-----------+
+
+2. Display employee name, salary, and company name.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select e.emp_name, e.salary, c.company_name
+                                      -> from employees e
+                                      -> inner join company c
+                                      -> on e.company_id = c.company_id;
++----------+--------+--------------+
+| emp_name | salary | company_name |
++----------+--------+--------------+
+| Amit     |  60000 | TCS          |
+| Ravi     |  45000 | TCS          |
+| Kiran    |  52000 | TCS          |
+| Priya    |  48000 | TCS          |
+| Sita     |  70000 | Infosys      |
+| Anu      |  55000 | Infosys      |
+| Rahul    |  75000 | Infosys      |
+| Neha     |  62000 | Infosys      |
+| John     |  40000 | Wipro        |
+| Arjun    |  50000 | Wipro        |
++----------+--------+--------------+
+
+3. List all employees who are assigned to a department.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select e.emp_id, e.emp_name, d.dept_id, d.dept_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id;
++--------+----------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_name |
++--------+----------+---------+-----------+
+|   1001 | Amit     |     101 | HR        |
+|   1006 | Kiran    |     101 | HR        |
+|   1002 | Ravi     |     102 | IT        |
+|   1007 | Priya    |     102 | IT        |
+|   1003 | Sita     |     103 | Finance   |
+|   1008 | Rahul    |     103 | Finance   |
+|   1004 | Anu      |     104 | Marketing |
+|   1009 | Neha     |     104 | Marketing |
+|   1005 | John     |     105 | Support   |
+|   1010 | Arjun    |     105 | Support   |
++--------+----------+---------+-----------+
+
+4. Show employee details along with department location.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select e.emp_id, e.emp_name, d.dept_id, d.dept_name, d.location
+                                      ->  from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id;
++--------+----------+---------+-----------+-----------+
+| emp_id | emp_name | dept_id | dept_name | location  |
++--------+----------+---------+-----------+-----------+
+|   1001 | Amit     |     101 | HR        | Hyderabad |
+|   1006 | Kiran    |     101 | HR        | Hyderabad |
+|   1002 | Ravi     |     102 | IT        | Bangalore |
+|   1007 | Priya    |     102 | IT        | Bangalore |
+|   1003 | Sita     |     103 | Finance   | Chennai   |
+|   1008 | Rahul    |     103 | Finance   | Chennai   |
+|   1004 | Anu      |     104 | Marketing | Mumbai    |
+|   1009 | Neha     |     104 | Marketing | Mumbai    |
+|   1005 | John     |     105 | Support   | Delhi     |
+|   1010 | Arjun    |     105 | Support   | Delhi     |
++--------+----------+---------+-----------+-----------+
+
+5. Get all employees working in a specific department (e.g., "HR").
+
+MySQL  localhost:33060+ ssl  d13  SQL >  select e.emp_id, e.emp_name, d.dept_id, d.dept_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id
+                                      -> where dept_name = "HR";
++--------+----------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_name |
++--------+----------+---------+-----------+
+|   1001 | Amit     |     101 | HR        |
+|   1006 | Kiran    |     101 | HR        |
++--------+----------+---------+-----------+
+
+6. Display employee name and company name where employees
+belong to a department.
+
+MySQL  localhost:33060+ ssl  d13  SQL >  select e.emp_name, c.company_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id
+                                      -> inner join company c
+                                      -> on c.company_id = d.company_id;
++----------+--------------+
+| emp_name | company_name |
++----------+--------------+
+| Amit     | TCS          |
+| Kiran    | TCS          |
+| Ravi     | TCS          |
+| Priya    | TCS          |
+| Sita     | Infosys      |
+| Rahul    | Infosys      |
+| Anu      | Infosys      |
+| Neha     | Infosys      |
+| John     | Wipro        |
+| Arjun    | Wipro        |
++----------+--------------+
+
+7. Find employees whose department exists in the company table.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select  e.emp_id, e.emp_name, d.dept_name, c.company_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id
+                                      -> inner join company c
+                                      ->  on c.company_id = d.company_id;
++--------+----------+-----------+--------------+
+| emp_id | emp_name | dept_name | company_name |
++--------+----------+-----------+--------------+
+|   1001 | Amit     | HR        | TCS          |
+|   1006 | Kiran    | HR        | TCS          |
+|   1002 | Ravi     | IT        | TCS          |
+|   1007 | Priya    | IT        | TCS          |
+|   1003 | Sita     | Finance   | Infosys      |
+|   1008 | Rahul    | Finance   | Infosys      |
+|   1004 | Anu      | Marketing | Infosys      |
+|   1009 | Neha     | Marketing | Infosys      |
+|   1005 | John     | Support   | Wipro        |
+|   1010 | Arjun    | Support   | Wipro        |
++--------+----------+-----------+--------------+
+
+8. Show all employees with their department and company details.
+ MySQL  localhost:33060+ ssl  d13  SQL > select e.emp_name, d.dept_id, d.dept_name, c.company_id, c.company_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id
+                                      -> inner join company c
+                                      -> on c.company_id = d.company_id;
++----------+---------+-----------+------------+--------------+
+| emp_name | dept_id | dept_name | company_id | company_name |
++----------+---------+-----------+------------+--------------+
+| Amit     |     101 | HR        |          1 | TCS          |
+| Kiran    |     101 | HR        |          1 | TCS          |
+| Ravi     |     102 | IT        |          1 | TCS          |
+| Priya    |     102 | IT        |          1 | TCS          |
+| Sita     |     103 | Finance   |          2 | Infosys      |
+| Rahul    |     103 | Finance   |          2 | Infosys      |
+| Anu      |     104 | Marketing |          2 | Infosys      |
+| Neha     |     104 | Marketing |          2 | Infosys      |
+| John     |     105 | Support   |          3 | Wipro        |
+| Arjun    |     105 | Support   |          3 | Wipro        |
++----------+---------+-----------+------------+--------------+
+
+9. Retrieve employees and their department names where salary >
+50,000.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select e.emp_id, e.emp_name, e.salary, d.dept_name
+                                      -> from employees e
+                                      -> inner join departments d
+                                      -> on e.dept_id = d.dept_id
+                                      -> where e.salary>50000;
++--------+----------+--------+-----------+
+| emp_id | emp_name | salary | dept_name |
++--------+----------+--------+-----------+
+|   1001 | Amit     |  60000 | HR        |
+|   1003 | Sita     |  70000 | Finance   |
+|   1004 | Anu      |  55000 | Marketing |
+|   1006 | Kiran    |  52000 | HR        |
+|   1008 | Rahul    |  75000 | Finance   |
+|   1009 | Neha     |  62000 | Marketing |
++--------+----------+--------+-----------+
+
+10. List employees who are working in departments under a
+specific company.
+
+MySQL  localhost:33060+ ssl  d13  SQL >  select e.emp_name, d.dept_name, c.company_name
+                                      -> from employees e
+                                      -> inner join departments d on e.dept_id = d.dept_id
+                                      -> inner join company c on c.company_id = d.company_id
+                                      -> where c.company_name = "Infosys";
++----------+-----------+--------------+
+| emp_name | dept_name | company_name |
++----------+-----------+--------------+
+| Sita     | Finance   | Infosys      |
+| Rahul    | Finance   | Infosys      |
+| Anu      | Marketing | Infosys      |
+| Neha     | Marketing | Infosys      |
++----------+-----------+--------------+
+
+2. Movie, Booking, Theatre
+
+1. Retrieve all bookings along with movie names.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, b.booking_id, b.customer_name, b.tickets
+                                      -> from movies m
+                                      -> inner join booking b on m.movie_id=b.movie_id;
++------------+------------+---------------+---------+
+| movie_name | booking_id | customer_name | tickets |
++------------+------------+---------------+---------+
+| Leo        |       1001 | Amit          |       2 |
+| Leo        |       1004 | Anu           |       4 |
+| Jailer     |       1002 | Ravi          |       3 |
+| RRR        |       1003 | Sita          |       1 |
+| KGF        |       1005 | John          |       2 |
++------------+------------+---------------+---------+
+
+2. Display movie name and theatre name for each booking.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, t.theatre_name
+                                      -> from movies m
+                                      -> inner join booking b on m.movie_id=b.movie_id
+                                      -> inner join theatre t on t.theatre_id=b.theatre_id;
++------------+---------------+
+| movie_name | theatre_name  |
++------------+---------------+
+| Leo        | PVR Cinemas   |
+| Leo        | PVR Cinemas   |
+| Jailer     | INOX          |
+| KGF        | INOX          |
+| RRR        | Asian Cinemas |
++------------+---------------+ 
+
+3. List all customers who booked tickets for a movie.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, b.customer_name
+                                      -> from movies m
+                                      -> inner join booking b on m.movie_id=b.movie_id;
++------------+---------------+
+| movie_name | customer_name |
++------------+---------------+
+| Leo        | Amit          |
+| Leo        | Anu           |
+| Jailer     | Ravi          |
+| RRR        | Sita          |
+| KGF        | John          |
++------------+---------------+ 
+
+4. Show all movies that have at least one booking.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name
+                                      -> from movies m
+                                      -> inner join booking b on m.movie_id=b.movie_id;
++------------+
+| movie_name |
++------------+
+| Leo        |
+| Leo        |
+| Jailer     |
+| RRR        |
+| KGF        |
++------------+
+5. Retrieve booking details with theatre location.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select b.booking_id, b.customer_name, t.location
+                                      -> from booking b
+                                      -> inner join theatre t on t.theatre_id=b.theatre_id;
++------------+---------------+-----------+
+| booking_id | customer_name | location  |
++------------+---------------+-----------+
+|       1001 | Amit          | Hyderabad |
+|       1004 | Anu           | Hyderabad |
+|       1002 | Ravi          | Bangalore |
+|       1005 | John          | Bangalore |
+|       1003 | Sita          | Chennai   |
++------------+---------------+-----------+ 
+
+6. Display movie name, show time, and theatre name.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, m.show_time, t.theatre_name
+                                      -> from movies m
+                                      -> inner join booking b on b.movie_id=m.movie_id
+                                      -> inner join theatre t on b.theatre_id=t.theatre_id;
++------------+-----------+---------------+
+| movie_name | show_time | theatre_name  |
++------------+-----------+---------------+
+| Leo        | 10:00 AM  | PVR Cinemas   |
+| Leo        | 10:00 AM  | PVR Cinemas   |
+| Jailer     | 1:00 PM   | INOX          |
+| KGF        | 7:00 PM   | INOX          |
+| RRR        | 4:00 PM   | Asian Cinemas |
++------------+-----------+---------------+ 
+
+7. Find all bookings made for a specific movie.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, b.booking_id, b.customer_name
+                                      -> from movies m
+                                      -> inner join booking b on b.movie_id=m.movie_id
+                                      -> inner join theatre t on b.theatre_id=t.theatre_id
+                                      -> where movie_name="RRR";
++------------+------------+---------------+
+| movie_name | booking_id | customer_name |
++------------+------------+---------------+
+| RRR        |       1003 | Sita          |
++------------+------------+---------------+ 
+
+8. Show all theatres where movies are booked.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select t.theatre_name
+                                      -> from theatre t
+                                      -> inner join booking b on b.theatre_id=t.theatre_id;
++---------------+
+| theatre_name  |
++---------------+
+| PVR Cinemas   |
+| PVR Cinemas   |
+| INOX          |
+| INOX          |
+| Asian Cinemas |
++---------------+ 
+
+9. Retrieve movies along with number of bookings (using INNER JOIN).
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, count(b.booking_id) as total_booking
+                                      -> from movies m
+                                      -> inner join booking b on m.movie_id=b.movie_id
+                                      -> group by m.movie_name;
++------------+---------------+
+| movie_name | total_booking |
++------------+---------------+
+| Leo        |             2 |
+| Jailer     |             1 |
+| RRR        |             1 |
+| KGF        |             1 |
++------------+---------------+ 
+
+10. Display booking details only for movies available in theatres.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select b.booking_id, b.customer_name, m.movie_name, t.theatre_name
+                                      -> from booking b
+                                      -> inner join movies m on b.movie_id = m.movie_id
+                                      -> inner join theatre t on b.theatre_id = t.theatre_id;
++------------+---------------+------------+---------------+
+| booking_id | customer_name | movie_name | theatre_name  |
++------------+---------------+------------+---------------+
+|       1001 | Amit          | Leo        | PVR Cinemas   |
+|       1004 | Anu           | Leo        | PVR Cinemas   |
+|       1002 | Ravi          | Jailer     | INOX          |
+|       1005 | John          | KGF        | INOX          |
+|       1003 | Sita          | RRR        | Asian Cinemas |
++------------+---------------+------------+---------------+ 
+
+3. Students and Placement
+
+1. Retrieve all students who got placed.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select s.student_id, s.student_name, p.placement_id, p.company_name
+                                      -> from students s
+                                      -> inner join placement p on s.student_id=p.student_id;
++------------+--------------+--------------+--------------+
+| student_id | student_name | placement_id | company_name |
++------------+--------------+--------------+--------------+
+|        101 | Amit         |            1 | TCS          |
+|        102 | Ravi         |            2 | Infosys      |
+|        103 | Sita         |            3 | Wipro        |
+|        104 | Anu          |            4 | Accenture    |
+|        105 | John         |            5 | Capgemini    |
++------------+--------------+--------------+--------------+ 
+
+2. Display student name along with company name.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select s.student_name, p.company_name
+                                      -> from students s
+                                      -> inner join placement p on s.student_id=p.student_id;
++--------------+--------------+
+| student_name | company_name |
++--------------+--------------+
+| Amit         | TCS          |
+| Ravi         | Infosys      |
+| Sita         | Wipro        |
+| Anu          | Accenture    |
+| John         | Capgemini    |
++--------------+--------------+ 
+
+3. List students with their placement package details.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select s.student_name, p.company_name, p.package
+                                      -> from students s
+                                      -> inner join placement p on s.student_id=p.student_id;
++--------------+--------------+---------+
+| student_name | company_name | package |
++--------------+--------------+---------+
+| Amit         | TCS          |  450000 |
+| Ravi         | Infosys      |  500000 |
+| Sita         | Wipro        |  420000 |
+| Anu          | Accenture    |  650000 |
+| John         | Capgemini    |  480000 |
++--------------+--------------+---------+ 
+
+4. Show students who are placed in a specific company.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select s.student_name, p.company_name
+                                      -> from students s
+                                      -> inner join placement p on s.student_id=p.student_id
+                                      -> where p.company_name = "TCS";
++--------------+--------------+
+| student_name | company_name |
++--------------+--------------+
+| Amit         | TCS          |
++--------------+--------------+ 
+
+5. Retrieve all placement records with student details. 
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select p.*, s.student_name, s.branch
+                                      -> from placement p
+                                      -> inner join students s on s.student_id=p.student_id;
++--------------+------------+--------------+---------+-----------+--------------+--------+
+| placement_id | student_id | company_name | package | location  | student_name | branch |
++--------------+------------+--------------+---------+-----------+--------------+--------+
+|            1 |        101 | TCS          |  450000 | Hyderabad | Amit         | CSE    |
+|            2 |        102 | Infosys      |  500000 | Bangalore | Ravi         | ECE    |
+|            3 |        103 | Wipro        |  420000 | Chennai   | Sita         | IT     |
+|            4 |        104 | Accenture    |  650000 | Pune      | Anu          | EEE    |
+|            5 |        105 | Capgemini    |  480000 | Mumbai    | John         | CSE    |
++--------------+------------+--------------+---------+-----------+--------------+--------+ 
+
+6. Display student name, branch, and placement company.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select s.student_name, s.branch, p.company_name
+                                      -> from placement p
+                                      -> inner join students s on s.student_id=p.student_id;
++--------------+--------+--------------+
+| student_name | branch | company_name |
++--------------+--------+--------------+
+| Amit         | CSE    | TCS          |
+| Ravi         | ECE    | Infosys      |
+| Sita         | IT     | Wipro        |
+| Anu          | EEE    | Accenture    |
+| John         | CSE    | Capgemini    |
++--------------+--------+--------------+ 
+
+7. Find students whose placement record exists.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select s.*
+                                      -> from students s
+                                      -> inner join placement p on s.student_id = p.student_id;
++------------+--------------+--------+
+| student_id | student_name | branch |
++------------+--------------+--------+
+|        101 | Amit         | CSE    |
+|        102 | Ravi         | ECE    |
+|        103 | Sita         | IT     |
+|        104 | Anu          | EEE    |
+|        105 | John         | CSE    |
++------------+--------------+--------+ 
+
+8. Show placed students with salary greater than a specific amount.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select s.student_name, p.package
+                                      -> from placement p
+                                      -> inner join students s on s.student_id=p.student_id
+                                      -> where p.package>450000;
++--------------+---------+
+| student_name | package |
++--------------+---------+
+| Ravi         |  500000 |
+| Anu          |  650000 |
+| John         |  480000 |
++--------------+---------+ 
+
+9. Retrieve student details along with placement location.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select s.*, p.location
+                                      -> from students s
+                                      -> inner join placement p on s.student_id = p.student_id;
++------------+--------------+--------+-----------+
+| student_id | student_name | branch | location  |
++------------+--------------+--------+-----------+
+|        101 | Amit         | CSE    | Hyderabad |
+|        102 | Ravi         | ECE    | Bangalore |
+|        103 | Sita         | IT     | Chennai   |
+|        104 | Anu          | EEE    | Pune      |
+|        105 | John         | CSE    | Mumbai    |
++------------+--------------+--------+-----------+ 
+
+10. Display all students who have valid placement records.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select s.student_id, s.student_name, s.branch
+                                      -> from students s
+                                      -> inner join placement p on s.student_id = p.student_id;
++------------+--------------+--------+
+| student_id | student_name | branch |
++------------+--------------+--------+
+|        101 | Amit         | CSE    |
+|        102 | Ravi         | ECE    |
+|        103 | Sita         | IT     |
+|        104 | Anu          | EEE    |
+|        105 | John         | CSE    |
++------------+--------------+--------+ 
+
+
+1. Write a query to join three tables and display combined details.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select * from employees e
+                                      -> inner join departments d on e.dept_id=d.dept_id
+                                      -> inner join company c on d.company_id=c.company_id;
++--------+----------+--------+---------+------------+---------+-----------+-----------+------------+------------+--------------+
+| emp_id | emp_name | salary | dept_id | company_id | dept_id | dept_name | location  | company_id | company_id | company_name |
++--------+----------+--------+---------+------------+---------+-----------+-----------+------------+------------+--------------+
+|   1001 | Amit     |  60000 |     101 |          1 |     101 | HR        | Hyderabad |          1 |          1 | TCS          |
+|   1006 | Kiran    |  52000 |     101 |          1 |     101 | HR        | Hyderabad |          1 |          1 | TCS          |
+|   1002 | Ravi     |  45000 |     102 |          1 |     102 | IT        | Bangalore |          1 |          1 | TCS          |
+|   1007 | Priya    |  48000 |     102 |          1 |     102 | IT        | Bangalore |          1 |          1 | TCS          |
+|   1003 | Sita     |  70000 |     103 |          2 |     103 | Finance   | Chennai   |          2 |          2 | Infosys      |
+|   1008 | Rahul    |  75000 |     103 |          2 |     103 | Finance   | Chennai   |          2 |          2 | Infosys      |
+|   1004 | Anu      |  55000 |     104 |          2 |     104 | Marketing | Mumbai    |          2 |          2 | Infosys      |
+|   1009 | Neha     |  62000 |     104 |          2 |     104 | Marketing | Mumbai    |          2 |          2 | Infosys      |
+|   1005 | John     |  40000 |     105 |          3 |     105 | Support   | Delhi     |          3 |          3 | Wipro        |
+|   1010 | Arjun    |  50000 |     105 |          3 |     105 | Support   | Delhi     |          3 |          3 | Wipro        |
++--------+----------+--------+---------+------------+---------+-----------+-----------+------------+------------+--------------+ 
+
+2. Find records that exist in all three tables only.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select *
+                                      -> from placement p
+                                      -> inner join students s on s.student_id=p.student_id;
++--------------+------------+--------------+---------+-----------+------------+--------------+--------+
+| placement_id | student_id | company_name | package | location  | student_id | student_name | branch |
++--------------+------------+--------------+---------+-----------+------------+--------------+--------+
+|            1 |        101 | TCS          |  450000 | Hyderabad |        101 | Amit         | CSE    |
+|            2 |        102 | Infosys      |  500000 | Bangalore |        102 | Ravi         | ECE    |
+|            3 |        103 | Wipro        |  420000 | Chennai   |        103 | Sita         | IT     |
+|            4 |        104 | Accenture    |  650000 | Pune      |        104 | Anu          | EEE    |
+|            5 |        105 | Capgemini    |  480000 | Mumbai    |        105 | John         | CSE    |
++--------------+------------+--------------+---------+-----------+------------+--------------+--------+
+
+3. Retrieve data where matching exists across multiple tables.
+
+ MySQL  localhost:33060+ ssl  d13  SQL > select b.booking_id, b.customer_name, m.movie_name, t.theatre_name
+                                      -> from booking b
+                                      -> inner join movies m on b.movie_id = m.movie_id
+                                      -> inner join theatre t on b.theatre_id = t.theatre_id;
++------------+---------------+------------+---------------+
+| booking_id | customer_name | movie_name | theatre_name  |
++------------+---------------+------------+---------------+
+|       1001 | Amit          | Leo        | PVR Cinemas   |
+|       1004 | Anu           | Leo        | PVR Cinemas   |
+|       1002 | Ravi          | Jailer     | INOX          |
+|       1005 | John          | KGF        | INOX          |
+|       1003 | Sita          | RRR        | Asian Cinemas |
++------------+---------------+------------+---------------+ 
+
+4. Write an INNER JOIN query using aliases.
+
+MySQL  localhost:33060+ ssl  d13  SQL > select b.booking_id, b.customer_name, m.movie_name, t.theatre_name
+                                      -> from booking b
+                                      -> inner join movies m on b.movie_id = m.movie_id
+                                      -> inner join theatre t on b.theatre_id = t.theatre_id;
++------------+---------------+------------+---------------+
+| booking_id | customer_name | movie_name | theatre_name  |
++------------+---------------+------------+---------------+
+|       1001 | Amit          | Leo        | PVR Cinemas   |
+|       1004 | Anu           | Leo        | PVR Cinemas   |
+|       1002 | Ravi          | Jailer     | INOX          |
+|       1005 | John          | KGF        | INOX          |
+|       1003 | Sita          | RRR        | Asian Cinemas |
++------------+---------------+------------+---------------+ 
+
+5. Combine multiple INNER JOINs with conditions (WHERE
+clause).
+
+MySQL  localhost:33060+ ssl  d13  SQL > select m.movie_name, b.booking_id, b.customer_name
+                                      -> from movies m
+                                      -> inner join booking b on b.movie_id=m.movie_id
+                                      -> inner join theatre t on b.theatre_id=t.theatre_id
+                                      -> where movie_name="RRR";
++------------+------------+---------------+
+| movie_name | booking_id | customer_name |
++------------+------------+---------------+
+| RRR        |       1003 | Sita          |
++------------+------------+---------------+
